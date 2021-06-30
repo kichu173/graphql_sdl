@@ -1,0 +1,8 @@
+type Author {
+    id : ID!
+    name: String!
+    email: String!
+    posts: [Post]! # field resolver (created AuthorFieldResolver)
+    postCount: Int! # field resolver (created AuthorFieldResolver)
+    messages(first: Int!): [Message]! # need first 5 messages, parametrized fieldResolver (AuthorFieldResolver)
+}

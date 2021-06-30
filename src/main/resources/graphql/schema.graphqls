@@ -1,0 +1,14 @@
+type Query {
+    helloWorld: String!
+    greetingMessage(firstName: String!, lastName:String): String!
+    message: Message!
+    rollDice: [Int!]! # cannot return empty array and null
+    authors: [Author]!
+    recentPosts(count: Int!, offset: Int!): [Post]! #offset ->How many page we want to skip,count -> size of the page
+}
+
+type Mutation {
+    createAuthor(author: AuthorInput): ID!
+    createPost(post: PostInput!): ID!
+}
+
