@@ -1,5 +1,6 @@
 package com.example.graphql_sdl.services;
 
+import com.example.graphql_sdl.dto.AuthorDto;
 import com.example.graphql_sdl.dto.PostDto;
 
 import java.util.List;
@@ -13,4 +14,8 @@ public interface PostService {
     UUID createPost(PostDto postDto);
 
     Integer getPostCountByAuthorId(UUID id);
+
+    PostDto getPostById(UUID postId);
+
+    AuthorDto getAuthorById(UUID authorId);
 }

@@ -5,6 +5,7 @@ type Query {
     rollDice: [Int!]! # cannot return empty array and null
     authors: [Author]!
     recentPosts(count: Int!, offset: Int!): [Post]! #offset ->How many page we want to skip,count -> size of the page
+    messages(count: Int!,offset: Int!): [Message]!
 }
 
 type Mutation {

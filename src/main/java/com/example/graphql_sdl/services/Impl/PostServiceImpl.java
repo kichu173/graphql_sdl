@@ -1,5 +1,6 @@
 package com.example.graphql_sdl.services.Impl;
 
+import com.example.graphql_sdl.dto.AuthorDto;
 import com.example.graphql_sdl.dto.PostDto;
 import com.example.graphql_sdl.model.Author;
 import com.example.graphql_sdl.model.Post;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -73,5 +75,35 @@ public class PostServiceImpl implements PostService {
     @Override
     public Integer getPostCountByAuthorId(UUID id) {
         return postRepository.findAllByAuthor_Id(id).size();
+    }
+
+    @Override
+    public PostDto getPostById(UUID postId) {
+        Optional<Post> postOptional = postRepository.findById(postId);
+        if (!postOptional.isPresent()) {
+            throw new RuntimeException("Post does not exist!");
+        }
+        Post post = postOptional.get();
+        return PostDto.builder()
+                .id(post.getId())
+                .category(post.getCategory())
+                .title(post.getTitle())
+                .description(post.getDescription())
+                .authorId(post.getAuthor().getId())
+                .build();
+    }
+
+    @Override
+    public AuthorDto getAuthorById(UUID authorId) {
+        Optional<Author> authorOptional = authorRepository.findById(authorId);
+        if (!authorOptional.isPresent()) {
+            throw new RuntimeException("Author does not exist!");
+        }
+        Author author = authorOptional.get();
+        return AuthorDto.builder()
+                .id(authorId)
+                .name(author.getName())
+                .email(author.getEmail())
+                .build();
     }
 }

@@ -5,7 +5,9 @@ import com.example.graphql_sdl.dto.AuthorDto;
 import com.example.graphql_sdl.dto.MessageDto;
 import com.example.graphql_sdl.dto.PostDto;
 import com.example.graphql_sdl.services.AuthorService;
+import com.example.graphql_sdl.services.MessageService;
 import com.example.graphql_sdl.services.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -20,6 +22,9 @@ public class PostFieldResolver implements GraphQLResolver<PostDto> {
         this.authorService = authorService;
     }
 
+    @Autowired
+    private MessageService messageService;
+
     public AuthorDto author(PostDto postDto) {
         /*return AuthorDto.builder()
                 .id(UUID.randomUUID())
@@ -30,11 +35,12 @@ public class PostFieldResolver implements GraphQLResolver<PostDto> {
     }
 
     public List<MessageDto> getMessages(PostDto postDto, Integer first) {
-        return Collections.singletonList(
+        /*return Collections.singletonList(
                 MessageDto.builder()
                         .id(UUID.randomUUID())
                         .authorId(UUID.randomUUID())
                         .build()
-        );
+        );*/
+        return messageService.getFirstFewMessagesByPostId(postDto.getId(),first);
     }
 }

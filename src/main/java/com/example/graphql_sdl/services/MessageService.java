@@ -7,4 +7,8 @@ import java.util.UUID;
 
 public interface MessageService {
     List<MessageDto> getFirstFewMessagesByAuthorId(UUID authorId, Integer count);
+
+    List<MessageDto> getFirstFewMessagesByPostId(UUID postId, Integer count);
+
+    List<MessageDto> getMessages(Integer count, Integer offset);
 }

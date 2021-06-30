@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, UUID> {
     List<Message> findAllByAuthor_Id(UUID authorId, Pageable pageable);
+    List<Message> findAllByPost_Id(UUID postId, Pageable pageable);
 }
