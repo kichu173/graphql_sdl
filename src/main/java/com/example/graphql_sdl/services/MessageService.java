@@ -11,4 +11,6 @@ public interface MessageService {
     List<MessageDto> getFirstFewMessagesByPostId(UUID postId, Integer count);
 
     List<MessageDto> getMessages(Integer count, Integer offset);
+
+    UUID createMessage(MessageDto messageDto);
 }

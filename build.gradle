@@ -25,6 +25,7 @@ dependencies {
 	implementation 'com.graphql-java:graphql-java-tools:5.2.4' // dependency for graphql java tools (looks for file with extension graphql/graphqls) and create a schema
 	runtimeOnly 'com.graphql-java:graphiql-spring-boot-starter:5.0.2' // dependency for graphql playground
 	runtimeOnly 'com.graphql-java:voyager-spring-boot-starter:5.0.2' // dependency for inspecting the schema - voyager
+	implementation 'io.projectreactor:reactor-core'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'

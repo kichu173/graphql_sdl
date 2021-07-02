@@ -12,12 +12,19 @@ import java.util.UUID;
 public class PostMutationResolver implements GraphQLMutationResolver {
 
     private final PostService postService;
+    private final PostPublisher postPublisher;
+
     @Autowired
-    public PostMutationResolver(PostService postService) {
+    public PostMutationResolver(PostService postService, PostPublisher postPublisher) {
         this.postService = postService;
+        this.postPublisher = postPublisher;
     }
 
     public UUID createPost(PostDto postDto) {
-        return postService.createPost(postDto);
+//        return postService.createPost(postDto); // uncomment this if you want to recollect mutation
+        UUID uuid = postService.createPost(postDto);
+        postDto.setId(uuid);
+        postPublisher.publish(postDto);
+        return uuid;
     }
 }

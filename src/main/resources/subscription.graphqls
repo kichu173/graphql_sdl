@@ -1,0 +1,5 @@
+type Subscription {
+    recentPost: Post!
+    recentPostByAuthor(authorId: ID!): Post!
+    recentMessageByPost(PostId: ID!): Message!
+}

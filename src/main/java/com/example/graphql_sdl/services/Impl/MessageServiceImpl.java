@@ -1,10 +1,12 @@
 package com.example.graphql_sdl.services.Impl;
 
 import com.example.graphql_sdl.dto.MessageDto;
-import com.example.graphql_sdl.dto.PostDto;
+import com.example.graphql_sdl.model.Author;
 import com.example.graphql_sdl.model.Message;
 import com.example.graphql_sdl.model.Post;
+import com.example.graphql_sdl.repository.AuthorRepository;
 import com.example.graphql_sdl.repository.MessageRepository;
+import com.example.graphql_sdl.repository.PostRepository;
 import com.example.graphql_sdl.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,16 +14,21 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
+    private final PostRepository postRepository;
+    private final AuthorRepository authorRepository;
 
     @Autowired
-    public MessageServiceImpl(MessageRepository messageRepository) {
+    public MessageServiceImpl(MessageRepository messageRepository, PostRepository postRepository, AuthorRepository authorRepository) {
         this.messageRepository = messageRepository;
+        this.postRepository = postRepository;
+        this.authorRepository = authorRepository;
     }
 
     @Override
@@ -63,5 +70,19 @@ public class MessageServiceImpl implements MessageService {
                             .authorId(message.getAuthor().getId())
                             .build();
                 }).collect(Collectors.toList());
+    }
+
+    @Override
+    public UUID createMessage(MessageDto messageDto) {
+        Optional<Author> authorOptional = authorRepository.findById(messageDto.getAuthorId());
+        Optional<Post> postOptional = postRepository.findById(messageDto.getPostId());
+        Message message = Message.builder()
+                .text(messageDto.getText())
+                .author(authorOptional.get())
+                .post(postOptional.get())
+                .build();
+
+        Message createdComment = messageRepository.saveAndFlush(message);
+        return  createdComment.getId();
     }
 }

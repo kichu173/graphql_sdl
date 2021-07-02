@@ -1,0 +1,5 @@
+input MessageInput {
+    text: String!
+    postId: ID!
+    authorId: ID!
+}
