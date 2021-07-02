@@ -1,0 +1,6 @@
+type Customer {
+    birthday: Date!
+    workStartTime: Time!
+    bornAt:DateTime!
+    profileLink: SocialMediaLink # SocialMediaLink is a alias for String
+}

@@ -6,6 +6,7 @@ type Query {
     authors: [Author]!
     recentPosts(count: Int!, offset: Int!): [Post]! #offset ->How many page we want to skip,count -> size of the page
     messages(count: Int!,offset: Int!): [Message]!
+    customer(phoneNumber: PhoneNumber!, email: Email!): Customer!
 }
 
 type Mutation {
