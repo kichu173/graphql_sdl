@@ -2,6 +2,7 @@ package com.example.graphql_sdl.services.Impl;
 
 import com.example.graphql_sdl.dto.AuthorDto;
 import com.example.graphql_sdl.dto.PostDto;
+import com.example.graphql_sdl.exception.ResourceNotFound;
 import com.example.graphql_sdl.model.Author;
 import com.example.graphql_sdl.model.Post;
 import com.example.graphql_sdl.repository.AuthorRepository;
@@ -80,10 +81,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostDto getPostById(UUID postId) {
         Optional<Post> postOptional = postRepository.findById(postId);
-        if (!postOptional.isPresent()) {
-            throw new RuntimeException("Post does not exist!");
-        }
-        Post post = postOptional.get();
+        Post post = postOptional.orElseThrow(() -> new ResourceNotFound("Post is not exist: " + postId));
         return PostDto.builder()
                 .id(post.getId())
                 .category(post.getCategory())
@@ -96,10 +94,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public AuthorDto getAuthorById(UUID authorId) {
         Optional<Author> authorOptional = authorRepository.findById(authorId);
-        if (!authorOptional.isPresent()) {
-            throw new RuntimeException("Author does not exist!");
-        }
-        Author author = authorOptional.get();
+        Author author = authorOptional.orElseThrow(() -> new ResourceNotFound("User is not exist: " + authorId));
         return AuthorDto.builder()
                 .id(authorId)
                 .name(author.getName())

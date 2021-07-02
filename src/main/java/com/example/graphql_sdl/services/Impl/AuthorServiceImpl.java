@@ -1,6 +1,7 @@
 package com.example.graphql_sdl.services.Impl;
 
 import com.example.graphql_sdl.dto.AuthorDto;
+import com.example.graphql_sdl.exception.ResourceNotFound;
 import com.example.graphql_sdl.model.Author;
 import com.example.graphql_sdl.repository.AuthorRepository;
 import com.example.graphql_sdl.services.AuthorService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -35,7 +37,8 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public AuthorDto getAuthorById(UUID authorId) {
-        Author author = authorRepository.findById(authorId).get();
+        Optional<Author> authorOptional = authorRepository.findById(authorId);
+        Author author = authorOptional.orElseThrow(() -> new ResourceNotFound("User is not exist id: " + authorId));
         return AuthorDto.builder()
                 .id(author.getId())
                 .email(author.getEmail())

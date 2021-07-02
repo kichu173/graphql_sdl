@@ -1,6 +1,8 @@
 package com.example.graphql_sdl.services.Impl;
 
 import com.example.graphql_sdl.dto.MessageDto;
+import com.example.graphql_sdl.exception.ResourceNotFound;
+import com.example.graphql_sdl.mapper.MessageMapper;
 import com.example.graphql_sdl.model.Author;
 import com.example.graphql_sdl.model.Message;
 import com.example.graphql_sdl.model.Post;
@@ -23,24 +25,21 @@ public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
     private final PostRepository postRepository;
     private final AuthorRepository authorRepository;
+    private final MessageMapper messageMaper;
 
     @Autowired
-    public MessageServiceImpl(MessageRepository messageRepository, PostRepository postRepository, AuthorRepository authorRepository) {
+    public MessageServiceImpl(MessageRepository messageRepository, PostRepository postRepository, AuthorRepository authorRepository, MessageMapper messageMaper) {
         this.messageRepository = messageRepository;
         this.postRepository = postRepository;
         this.authorRepository = authorRepository;
+        this.messageMaper = messageMaper;
     }
 
     @Override
     public List<MessageDto> getFirstFewMessagesByAuthorId(UUID authorId, Integer count) {
         List<Message> allByAuthor_id = messageRepository.findAllByAuthor_Id(authorId, PageRequest.of(0, count));
         return allByAuthor_id.stream()
-                .map(message -> MessageDto.builder()
-                        .id(message.getId())
-                        .text(message.getText())
-                        .authorId(message.getAuthor().getId())
-                        .postId(message.getPost().getId())
-                        .build())
+                .map(messageMaper::convertMessageToDto)
                 .collect(Collectors.toList());
     }
 
@@ -48,13 +47,7 @@ public class MessageServiceImpl implements MessageService {
     public List<MessageDto> getFirstFewMessagesByPostId(UUID postId, Integer count) {
         List<Message> allByPost_id = messageRepository.findAllByPost_Id(postId, PageRequest.of(0, count));
         return allByPost_id.stream()
-                .map(message ->
-                        MessageDto.builder()
-                                .id(message.getId())
-                                .authorId(message.getAuthor().getId())
-                                .text(message.getText())
-                                .postId(postId)
-                                .build()).collect(Collectors.toList());
+                .map(messageMaper::convertMessageToDto).collect(Collectors.toList());
     }
 
     @Override
@@ -62,27 +55,24 @@ public class MessageServiceImpl implements MessageService {
         PageRequest of = PageRequest.of(offset, count); // offset ->How many page we want to skip,count -> size of the page
         Page<Message> all = messageRepository.findAll(of);
         return all.stream()
-                .map(message -> {
-                    return MessageDto.builder()
-                            .id(message.getId())
-                            .text(message.getText())
-                            .postId(message.getPost().getId())
-                            .authorId(message.getAuthor().getId())
-                            .build();
-                }).collect(Collectors.toList());
+                .map(messageMaper::convertMessageToDto).collect(Collectors.toList());
     }
 
     @Override
     public UUID createMessage(MessageDto messageDto) {
         Optional<Author> authorOptional = authorRepository.findById(messageDto.getAuthorId());
         Optional<Post> postOptional = postRepository.findById(messageDto.getPostId());
+        Author author = authorOptional.orElseThrow(() -> new ResourceNotFound("user is not exist!"));
+        Post post = postOptional.orElseThrow(() -> new ResourceNotFound("Post is not exist!"));
         Message message = Message.builder()
                 .text(messageDto.getText())
-                .author(authorOptional.get())
-                .post(postOptional.get())
+//                .author(authorOptional.get()) // uncomment it, use below replacement only in exception handling section
+//                .post(postOptional.get())
+                .author(author)
+                .post(post)
                 .build();
 
         Message createdComment = messageRepository.saveAndFlush(message);
-        return  createdComment.getId();
+        return createdComment.getId();
     }
 }
