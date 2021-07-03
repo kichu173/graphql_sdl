@@ -13,6 +13,6 @@ type Mutation {
     createAuthor(author: AuthorInput): ID!
     createPost(post: PostInput!): ID!
     createMessage(message: MessageInput!): ID!
-    createMessageForDirective(id: ID! @NotBlank,title:String! @NotBlank): ID!
+    createMessageForDirective(id: ID! @NotBlank(message: "createMessageForDirective.NotBlank.message"),title:String! @NotBlank(message: "createMessageForDirective.NotBlank.message")): ID!
 }
 

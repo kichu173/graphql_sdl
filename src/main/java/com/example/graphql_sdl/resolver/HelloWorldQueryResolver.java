@@ -15,7 +15,7 @@ import java.util.UUID;
 @Component
 public class HelloWorldQueryResolver implements GraphQLQueryResolver {
 
-    public String helloWorld() { // getHelloWorld, if boolean type isHelloWorld
+    public String helloWorld() { // getHelloWorld, if boolean type -> isHelloWorld
         return "hello World! First graphql definition";
     }
 
