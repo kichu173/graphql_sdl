@@ -4,7 +4,7 @@ type Query {
     message: Message!
     rollDice: [Int!]! # cannot return empty array and null
     authors: [Author]!
-    recentPosts(count: Int!, offset: Int!): [Post]! #offset ->How many page we want to skip,count -> size of the page
+    recentPosts(count: Int!, offset: Int!): [Post]! #offset ->How many page we want to skip,count -> size of the page(How many record we want)
     messages(count: Int!,offset: Int!): [Message]!
     customer(phoneNumber: PhoneNumber!, email: Email!): Customer!
 }
