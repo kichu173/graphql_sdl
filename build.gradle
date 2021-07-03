@@ -21,17 +21,20 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2' // dependency for graphql, after : (colon) is artifact name(graphql-spring-boot-starter:version)
-	implementation 'com.graphql-java:graphql-java-tools:5.2.4' // dependency for graphql java tools (looks for file with extension graphql/graphqls) and create a schema
-	runtimeOnly 'com.graphql-java:graphiql-spring-boot-starter:5.0.2' // dependency for graphql playground
-	runtimeOnly 'com.graphql-java:voyager-spring-boot-starter:5.0.2' // dependency for inspecting the schema - voyager
+	implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:11.1.0' // dependency for graphql, after : (colon) is artifact name(graphql-spring-boot-starter:version)
+//	implementation 'com.graphql-java:graphql-java-tools:5.2.4' // dependency for graphql java tools (looks for file with extension graphql/graphqls) and create a schema
+	runtimeOnly 'com.graphql-java-kickstart:graphiql-spring-boot-starter:11.1.0' // dependency for graphql playground
+	runtimeOnly 'com.graphql-java-kickstart:voyager-spring-boot-starter:11.1.0' // dependency for inspecting the schema - voyager
 	implementation 'io.projectreactor:reactor-core'
 	implementation group: 'com.graphql-java', name: 'graphql-java-extended-scalars', version: '1.0.1' // custom scalar type dependency
+	implementation group: 'com.graphql-java', name: 'graphql-java-extended-validation', version: '16.0.0'// for directive validation
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'com.graphql-java-kickstart:graphql-spring-boot-starter-test:11.1.0'
 }
 
 test {

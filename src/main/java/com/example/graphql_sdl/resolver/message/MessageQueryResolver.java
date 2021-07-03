@@ -1,8 +1,8 @@
 package com.example.graphql_sdl.resolver.message;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.example.graphql_sdl.dto.MessageDto;
 import com.example.graphql_sdl.services.MessageService;
+import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

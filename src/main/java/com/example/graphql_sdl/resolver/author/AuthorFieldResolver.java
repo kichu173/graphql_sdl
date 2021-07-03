@@ -1,17 +1,15 @@
 package com.example.graphql_sdl.resolver.author;
 
-import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.example.graphql_sdl.dto.AuthorDto;
 import com.example.graphql_sdl.dto.MessageDto;
 import com.example.graphql_sdl.dto.PostDto;
 import com.example.graphql_sdl.services.MessageService;
 import com.example.graphql_sdl.services.PostService;
+import graphql.kickstart.tools.GraphQLResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 @Component
 public class AuthorFieldResolver implements GraphQLResolver<AuthorDto> {

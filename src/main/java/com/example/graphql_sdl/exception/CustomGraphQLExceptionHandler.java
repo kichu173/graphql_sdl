@@ -2,7 +2,7 @@ package com.example.graphql_sdl.exception;
 
 import graphql.ExceptionWhileDataFetching;
 import graphql.GraphQLError;
-import graphql.servlet.GraphQLErrorHandler;
+import graphql.kickstart.execution.error.GraphQLErrorHandler;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

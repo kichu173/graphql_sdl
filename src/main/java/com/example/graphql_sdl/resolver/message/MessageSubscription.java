@@ -1,7 +1,7 @@
 package com.example.graphql_sdl.resolver.message;
 
-import com.coxautodev.graphql.tools.GraphQLSubscriptionResolver;
 import com.example.graphql_sdl.dto.MessageDto;
+import graphql.kickstart.tools.GraphQLSubscriptionResolver;
 import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

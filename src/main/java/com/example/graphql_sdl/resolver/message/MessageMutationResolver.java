@@ -1,8 +1,8 @@
 package com.example.graphql_sdl.resolver.message;
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.example.graphql_sdl.dto.MessageDto;
 import com.example.graphql_sdl.services.MessageService;
+import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +25,10 @@ public class MessageMutationResolver implements GraphQLMutationResolver {
         messageDto.setId(id);
         messagePublisher.publish(messageDto);
         return id;
+    }
+
+    public UUID createMessageForDirective(UUID id, String title) {// for directive validation
+        return UUID.randomUUID();
     }
 
 }

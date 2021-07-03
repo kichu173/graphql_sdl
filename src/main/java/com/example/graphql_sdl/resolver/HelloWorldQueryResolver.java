@@ -1,8 +1,8 @@
 package com.example.graphql_sdl.resolver;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.example.graphql_sdl.dto.CustomerDto;
 import com.example.graphql_sdl.dto.MessageDto;
+import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

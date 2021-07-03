@@ -1,8 +1,8 @@
 package com.example.graphql_sdl.resolver.author;
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.example.graphql_sdl.dto.AuthorDto;
 import com.example.graphql_sdl.services.AuthorService;
+import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

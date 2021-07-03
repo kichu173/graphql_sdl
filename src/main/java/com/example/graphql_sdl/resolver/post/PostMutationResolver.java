@@ -1,8 +1,8 @@
 package com.example.graphql_sdl.resolver.post;
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.example.graphql_sdl.dto.PostDto;
 import com.example.graphql_sdl.services.PostService;
+import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
