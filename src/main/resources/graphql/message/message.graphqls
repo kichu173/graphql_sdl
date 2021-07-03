@@ -1,6 +1,6 @@
 type Message {
     id: ID!
-    text: String!
+    text: String! @uppercase
     post: Post!
     author: Author!
 }

@@ -6,6 +6,7 @@ import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -27,7 +28,8 @@ public class MessageMutationResolver implements GraphQLMutationResolver {
         return id;
     }
 
-    public UUID createMessageForDirective(UUID id, String title) {// for directive validation
+    // https://github.com/graphql-java/graphql-java-extended-validation
+    public UUID createMessageForDirective(UUID id, String title, List<Integer> luckyNumbers, Integer value) {// for directive validation
         return UUID.randomUUID();
     }
 
