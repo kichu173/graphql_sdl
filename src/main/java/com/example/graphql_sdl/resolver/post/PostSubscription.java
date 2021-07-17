@@ -11,7 +11,7 @@ import java.util.UUID;
 @Component
 public class PostSubscription implements GraphQLSubscriptionResolver {
     @Autowired
-    private PostPublisher postPublisher;
+    private PostPublisher postPublisher;// responsible for pushing newly created data to client
 
     public Publisher<PostDto> recentPost() {
         return postPublisher.getRecentPosts();

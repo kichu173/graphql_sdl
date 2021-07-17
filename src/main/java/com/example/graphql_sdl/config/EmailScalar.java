@@ -13,7 +13,7 @@ public class EmailScalar {
     public GraphQLScalarType email() {
         return new GraphQLScalarType("Email", "custom email scalar type", new Coercing() {
             @Override
-            public Object serialize(Object dataFetcherResult) throws CoercingSerializeException {
+            public Object serialize(Object dataFetcherResult) throws CoercingSerializeException { // Output
                 if (dataFetcherResult instanceof StringValue) {
                     return dataFetcherResult.toString();
                 }
@@ -22,7 +22,7 @@ public class EmailScalar {
             }
 
             @Override
-            public Object parseValue(Object input) throws CoercingParseValueException {
+            public Object parseValue(Object input) throws CoercingParseValueException { // I/P (called with query variables)
                 if (input instanceof String) {
                     String possibleEmail = input.toString();
                     if (isValidEmail(possibleEmail)) {
@@ -34,7 +34,7 @@ public class EmailScalar {
             }
 
             @Override
-            public Object parseLiteral(Object input) throws CoercingParseLiteralException {
+            public Object parseLiteral(Object input) throws CoercingParseLiteralException {// I/P
                 if (input instanceof StringValue) {
 
                     String possibleEmailValue = input.toString();

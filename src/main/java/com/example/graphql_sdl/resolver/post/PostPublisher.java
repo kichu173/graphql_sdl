@@ -17,11 +17,11 @@ public class PostPublisher {
     }
 
     public Publisher<PostDto> getRecentPosts() {
-        return processor.asFlux();
+        return processor.asFlux();// return post to client side
     }
 
     public void publish(PostDto postDto) {
-        processor.emitNext(postDto, Sinks.EmitFailureHandler.FAIL_FAST);
+        processor.emitNext(postDto, Sinks.EmitFailureHandler.FAIL_FAST);// newly created post will have publish() in PostMutationResolver(createPost()), whenever created it will emit here
     }
 
     public Publisher<PostDto> getRecentPostByAuthor(UUID authorId) {

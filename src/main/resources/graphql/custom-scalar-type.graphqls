@@ -5,7 +5,7 @@ scalar Time
 
 #phone number scalar type
 scalar PhoneNumber
-#alias
+#alias representing String
 scalar SocialMediaLink
 # custom scalar type from scratch without using jar
 scalar Email

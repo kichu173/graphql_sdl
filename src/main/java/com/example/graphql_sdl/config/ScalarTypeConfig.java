@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class ScalarTypeConfig {
     @Bean
     public GraphQLScalarType date() {
-        return ExtendedScalars.Date;
+        return ExtendedScalars.Date;// java-extended-scalars jar provides us this
     }
 
     @Bean
